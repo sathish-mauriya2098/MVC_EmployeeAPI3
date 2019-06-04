@@ -1,0 +1,203 @@
+﻿@model EmployeeDataAccess.Employee
+
+@{
+    ViewBag.Title = "EDIT DETAILS";
+}
+<script>
+         $(function () {
+             $("#EmpDob,#EmpDoj").datepicker({
+                 dateFormat: "yy-mm-dd",
+                 changeMonth: true,
+                 changeYear: true,
+                 yearRange: "-30:"
+             });
+             /*$(".validate").onsubmit(function () {
+                 validation();
+                 //alert("H");
+             });*/
+    });
+    function validation() {
+        var empDob = document.getElementById('EmpDob').value;
+        var empDoj = document.getElementById('EmpDoj').value;
+        var dob = new Date(empDob);
+        var doj = new Date(empDoj);
+        var currentDate = new Date(); //current date
+        var td = currentDate.getDate();
+        var tm = currentDate.getMonth() + 1;
+        var tyy = currentDate.getFullYear();
+
+        var dobyy = dob.getFullYear();
+
+        var dojd = doj.getDate();
+        var dojm = doj.getMonth() + 1;
+        var dojyy = doj.getFullYear();
+        var validoj = dojyy - dobyy //calculating valid joining year based on the DOB
+
+        if (dojyy > tyy || (validoj < 18 || validoj > 60)) {
+            document.getElementById('dojerror').innerHTML = "Enter valid date of joining";
+            return false;
+        }
+        else if (dojyy == tyy) {
+            if (dojm == tm) {
+                if (dojd > td) {
+                    document.getElementById('dojerror').innerHTML = "Doj should not greater then current date";
+                    return false;
+                }
+            }
+            if (dojm > tm) {
+                document.getElementById('dojerror').innerHTML = "Doj should not greater then current date or month";
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+<style>
+    .card {
+        border: 1px solid;
+    }
+
+    label {
+        margin-left: 15px;
+        float: left;
+    }
+
+    p1 {
+        display: block;
+        font-size: 12px;
+    }
+</style>
+<br /><br />
+<center>
+    <div class="card col-sm-6">
+        <div class="card-body">
+            <h3 class="text-center">EDIT EMPLOYEES</h3>
+
+            @using (Html.BeginForm("Update", "Employee", FormMethod.Post, new { onSubmit = "return validation()" }))
+            {
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.EmpId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            @Html.TextBoxFor(model => model.EmpName, new { @class = "form-control" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.EmpName)</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee Email Id <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            @Html.TextBoxFor(model => model.EmailId, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.EmailId)</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Password)</span>
+                        <p1 style="color:forestgreen">Note* : contains atleast 1 lowercase,1 number,1 special char, minimum 7 characters</p1>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee DOB <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-birthday-cake"></i></span>
+                            @Html.TextBoxFor(model => model.EmpDob, new { @class = "form-control", Value = Model.EmpDob.ToString("yyyy-MM-dd") })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.EmpDob)</span>
+                        <span id="doberror"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee Mobile.No <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Mobile)</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee DOJ <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-calendar-check-o"></i></span>
+                            @Html.TextBoxFor(model => model.EmpDoj, new { @class = "form-control", Value = Model.EmpDoj.ToString("yyyy-MM-dd") })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.EmpDoj)</span>
+                        <span id="dojerror" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee Designation <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-graduation-cap"></i></span>
+                            @Html.DropDownListFor(model => model.Designation, new SelectList(new[]{"UI/UX DEVELOPER",
+"SOFTWARE DEVELOPER", "TESTER","INTERN","REVIEWER"}), "", new { @class = "form-control" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.Designation)</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Employee Salary <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-money"></i></span>
+                            @Html.TextBoxFor(model => model.EmpSalary, new { @class = "form-control" })
+                        </div>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.EmpSalary)</span>
+                        <span id="salerror"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.IsActive, new { @class = "form-control", @Value = false })
+
+                    </div>
+                </div>
+                <input type="submit" value="UPDATE" class="btn btn-success btn-block" />
+                <br>
+            }
+        </div>
+    </div>
+</center>
+<br>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

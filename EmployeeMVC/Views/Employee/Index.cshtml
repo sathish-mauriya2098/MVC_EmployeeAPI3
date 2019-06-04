@@ -1,0 +1,99 @@
+﻿@model IEnumerable<EmployeeDataAccess.Employee>
+
+@{
+    ViewBag.Title = "EMPLOYEE DETAILS";
+}
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
+<br />
+<p>
+    <a href="@Url.Action("AddDetails","Employee")" class="btn btn-success"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-striped text-nowrap" id="example">
+        <thead class="text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailId)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpDob)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpDoj)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Designation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpSalary)
+                </th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpDob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpDoj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpSalary)
+                </td>
+                <td>
+                    <a href="@Url.Action("Update", "Employee", new { id = item.EmpId})" class="btn btn-default"><i class="fa fa-pencil text-primary"></i>  Edit</a>
+                    <a onclick="Delete(@item.EmpId)" class="btn btn-default" style="cursor:pointer;"><i class="fa fa-trash text-danger"></i>  Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Do You want to Delete this Record ?',function(){
+                window.location.href  = '@Url.Action("Delete","Employee")/'+id;
+            });
+        }
+    </script>
+}

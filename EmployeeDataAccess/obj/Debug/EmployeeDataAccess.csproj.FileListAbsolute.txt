@@ -1,0 +1,10 @@
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\bin\Debug\EmployeeDataAccess.dll.config
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\bin\Debug\EmployeeDataAccess.dll
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\bin\Debug\EmployeeDataAccess.pdb
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\bin\Debug\EntityFramework.dll
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\bin\Debug\EntityFramework.xml
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\obj\Debug\EmployeeDataAccess.csprojAssemblyReference.cache
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\obj\Debug\EmployeeDataAccess.csproj.CoreCompileInputs.cache
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\obj\Debug\EmployeeDataAccess.csproj.CopyComplete
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\obj\Debug\EmployeeDataAccess.dll
+E:\ASPIRE_Training\Learn\LearnAPI\EmployeeAPINew3\EmployeeDataAccess\obj\Debug\EmployeeDataAccess.pdb
