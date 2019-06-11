@@ -56,7 +56,7 @@ namespace EmployeeMVC.Controllers
                 {
                     byte[] data = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
                 {
-                {"apikey" , "/gtMVfqKlLs-HHiN72lxfiB9bIhHY78jhjaGC7qytx"},
+                {"apikey" , "apiKey"},
                 {"numbers" , "91"+emp.Mobile},
                 {"message" ,message},
                 {"sender" , "TXTLCL"}
